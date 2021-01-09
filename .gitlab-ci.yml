@@ -3,7 +3,7 @@ build:
   image: ubuntu:20.10
   script:
     - apt update
-    - apt install -y buildah ca-certificates
+    - apt install -y buildah runc ca-certificates
 
     - export BUILDAH_FORMAT=docker
     - echo $CI_REGISTRY_PASSWORD | buildah login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
