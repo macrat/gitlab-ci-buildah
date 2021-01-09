@@ -1,0 +1,10 @@
+build:
+  stage: build
+  image: ubuntu:20.10
+  script:
+    - apt update
+    - apt install -y buildah
+    - echo $CI_BUILD_TOKEN | buildah login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - IMAGE_NAME="$CI_REGISTRY_IMAGE/$TARGET:latest"
+    - buildah bud -t $IMAGE_NAME .
+    - buildah push $IMAGE_NAME
