@@ -5,6 +5,6 @@ build:
     - apt update
     - apt install -y buildah
     - export BUILDAH_FORMAT=docker IMAGE_NAME="$CI_REGISTRY_IMAGE:latest"
-    - echo $CI_BUILD_TOKEN | buildah login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo $CI_REGISTRY_PASSWORD | buildah login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - buildah bud -t $IMAGE_NAME .
     - buildah push $IMAGE_NAME
